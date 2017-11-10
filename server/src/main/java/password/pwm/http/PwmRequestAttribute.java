@@ -53,6 +53,7 @@ public enum PwmRequestAttribute {
 
     HelpdeskDetail,
     HelpdeskObfuscatedDN,
+    HelpdeskUsername,
     HelpdeskVerificationEnabled,
 
     ConfigFilename,
@@ -80,13 +81,10 @@ public enum PwmRequestAttribute {
     ForgottenPasswordResendTokenEnabled,
     ForgottenPasswordTokenDestItems,
     ForgottenPasswordShowChangePasswordAction,
-    ForgottenPasswordShowUnlockAction,
 
     GuestCurrentExpirationDate,
     GuestMaximumExpirationDate,
     GuestMaximumValidDays,
-
-    IntruderDetectionAction,
 
     NewUser_FormShowBackButton,
     NewUser_VisibleProfiles,

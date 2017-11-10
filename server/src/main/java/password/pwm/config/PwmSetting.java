@@ -172,8 +172,6 @@ public enum PwmSetting {
             "password.showAutoGen", PwmSettingSyntax.BOOLEAN, PwmSettingCategory.CHANGE_PASSWORD),
     PASSWORD_SHOW_STRENGTH_METER(
             "password.showStrengthMeter", PwmSettingSyntax.BOOLEAN, PwmSettingCategory.CHANGE_PASSWORD),
-    PASSWORD_STRENGTH_METER_TYPE(
-            "password.strengthMeter.type", PwmSettingSyntax.SELECT, PwmSettingCategory.CHANGE_PASSWORD),
 
     // account info
     ACCOUNT_INFORMATION_ENABLED(
@@ -335,10 +333,10 @@ public enum PwmSetting {
 
 
     // sms settings
+    SMS_MAX_QUEUE_AGE(
+            "sms.queueMaxAge", PwmSettingSyntax.DURATION, PwmSettingCategory.SMS_GATEWAY),
     SMS_GATEWAY_URL(
             "sms.gatewayURL", PwmSettingSyntax.STRING, PwmSettingCategory.SMS_GATEWAY),
-    SMS_GATEWAY_CERTIFICATES(
-            "sms.gatewayCertificates", PwmSettingSyntax.X509CERT, PwmSettingCategory.SMS_GATEWAY),
     SMS_GATEWAY_USER(
             "sms.gatewayUser", PwmSettingSyntax.STRING, PwmSettingCategory.SMS_GATEWAY),
     SMS_GATEWAY_PASSWORD(
@@ -357,6 +355,8 @@ public enum PwmSetting {
             "sms.httpRequestHeaders", PwmSettingSyntax.STRING_ARRAY, PwmSettingCategory.SMS_GATEWAY),
     SMS_MAX_TEXT_LENGTH(
             "sms.maxTextLength", PwmSettingSyntax.NUMERIC, PwmSettingCategory.SMS_GATEWAY),
+    SMS_RESPONSE_OK_REGEX(
+            "sms.responseOkRegex", PwmSettingSyntax.STRING_ARRAY, PwmSettingCategory.SMS_GATEWAY),
     SMS_SENDER_ID(
             "sms.senderID", PwmSettingSyntax.STRING, PwmSettingCategory.SMS_GATEWAY),
     SMS_PHONE_NUMBER_FORMAT(
@@ -369,16 +369,12 @@ public enum PwmSetting {
             "sms.requestId.length", PwmSettingSyntax.NUMERIC, PwmSettingCategory.SMS_GATEWAY),
     SMS_USE_URL_SHORTENER(
             "sms.useUrlShortener", PwmSettingSyntax.BOOLEAN, PwmSettingCategory.SMS_GATEWAY),
-    SMS_RESPONSE_OK_REGEX(
-            "sms.responseOkRegex", PwmSettingSyntax.STRING_ARRAY, PwmSettingCategory.SMS_GATEWAY),
     SMS_SUCCESS_RESULT_CODE(
             "sms.successResultCodes", PwmSettingSyntax.STRING_ARRAY, PwmSettingCategory.SMS_GATEWAY),
     URL_SHORTENER_CLASS(
             "urlshortener.classname", PwmSettingSyntax.STRING, PwmSettingCategory.SMS_GATEWAY),
     URL_SHORTENER_PARAMETERS(
             "urlshortener.parameters", PwmSettingSyntax.STRING_ARRAY, PwmSettingCategory.SMS_GATEWAY),
-    SMS_MAX_QUEUE_AGE(
-            "sms.queueMaxAge", PwmSettingSyntax.DURATION, PwmSettingCategory.SMS_GATEWAY),
 
     SMS_CHALLENGE_TOKEN_TEXT(
             "sms.challenge.token.message", PwmSettingSyntax.LOCALIZED_STRING, PwmSettingCategory.SMS_MESSAGES),
@@ -722,7 +718,7 @@ public enum PwmSetting {
     CHALLENGE_ENFORCE_MINIMUM_PASSWORD_LIFETIME(
             "challenge.enforceMinimumPasswordLifetime", PwmSettingSyntax.BOOLEAN, PwmSettingCategory.RECOVERY_SETTINGS),
 
-    // recovery profile
+    // recovery definition/verification
     RECOVERY_PROFILE_LIST(
             "recovery.profile.list", PwmSettingSyntax.PROFILE, PwmSettingCategory.INTERNAL),
     RECOVERY_PROFILE_QUERY_MATCH(
@@ -738,17 +734,15 @@ public enum PwmSetting {
     RECOVERY_ALLOW_WHEN_LOCKED(
             "recovery.allowWhenLocked", PwmSettingSyntax.BOOLEAN, PwmSettingCategory.RECOVERY_DEF),
 
-
     // recovery action
     RECOVERY_ACTION(
-            "recovery.action", PwmSettingSyntax.SELECT, PwmSettingCategory.RECOVERY_DEF),
+            "recovery.action", PwmSettingSyntax.SELECT, PwmSettingCategory.RECOVERY_ACTIONS),
     RECOVERY_SENDNEWPW_METHOD(
-            "recovery.sendNewPassword.sendMethod", PwmSettingSyntax.SELECT, PwmSettingCategory.RECOVERY_DEF),
+            "recovery.sendNewPassword.sendMethod", PwmSettingSyntax.SELECT, PwmSettingCategory.RECOVERY_ACTIONS),
     RECOVERY_ALLOW_UNLOCK(
-            "challenge.allowUnlock", PwmSettingSyntax.BOOLEAN, PwmSettingCategory.RECOVERY_DEF),
+            "challenge.allowUnlock", PwmSettingSyntax.BOOLEAN, PwmSettingCategory.RECOVERY_ACTIONS),
     RECOVERY_ALLOW_CHANGE_PW_WITHIN_MIN_LIFETIME(
             "recovery.allowChangePwWithinMinLifetime", PwmSettingSyntax.BOOLEAN, PwmSettingCategory.RECOVERY_ACTIONS),
-
 
     // recovery oauth
     RECOVERY_OAUTH_ID_LOGIN_URL(
