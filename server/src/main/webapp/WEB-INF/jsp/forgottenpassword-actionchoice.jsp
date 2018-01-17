@@ -21,13 +21,8 @@
   ~ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   --%>
 
-;
-<%@ page import="password.pwm.PwmApplication" %>
-<%@ page import="password.pwm.http.servlet.changepw.ChangePasswordServletUtil" %>
-<%@ page import="password.pwm.ldap.UserInfo" %>
-<%@ page import="password.pwm.http.*" %>
+<!DOCTYPE html>
 <%@ page import="password.pwm.http.servlet.forgottenpw.ForgottenPasswordServlet" %>
-
 <%@ page language="java" session="true" isThreadSafe="true" contentType="text/html" %>
 <%@ taglib uri="pwm" prefix="pwm" %>
 <html lang="<pwm:value name="<%=PwmValue.localeCode%>"/>" dir="<pwm:value name="<%=PwmValue.localeDir%>"/>">
