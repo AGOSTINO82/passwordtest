@@ -34,6 +34,7 @@ import password.pwm.PwmApplication;
 import password.pwm.PwmConstants;
 import password.pwm.VerificationMethodSystem;
 import password.pwm.bean.LoginInfoBean;
+import password.pwm.bean.PasswordStatus;
 import password.pwm.bean.SessionLabel;
 import password.pwm.bean.TokenDestinationItem;
 import password.pwm.bean.UserIdentity;
@@ -45,7 +46,6 @@ import password.pwm.config.option.RecoveryAction;
 import password.pwm.config.profile.ForgottenPasswordProfile;
 import password.pwm.config.profile.ProfileType;
 import password.pwm.config.profile.ProfileUtility;
-import password.pwm.config.profile.PwmPasswordRule;
 import password.pwm.config.value.data.ActionConfiguration;
 import password.pwm.config.value.data.FormConfiguration;
 import password.pwm.error.ErrorInformation;
@@ -90,14 +90,12 @@ import password.pwm.util.RandomPasswordGenerator;
 import password.pwm.util.form.FormUtility;
 import password.pwm.util.java.JavaHelper;
 import password.pwm.util.java.JsonUtil;
-import password.pwm.util.java.TimeDuration;
 import password.pwm.util.logging.PwmLogger;
 import password.pwm.util.operations.ActionExecutor;
 import password.pwm.util.operations.PasswordUtility;
 import password.pwm.util.operations.cr.NMASCrOperator;
 import password.pwm.util.operations.otp.OTPUserRecord;
 import password.pwm.ws.server.RestResultBean;
-import java.time.Instant;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -114,7 +112,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
 /**
  * User interaction servlet for recovering user's password using secret question/answer
@@ -1042,7 +1039,7 @@ public class ForgottenPasswordServlet extends ControlledPwmServlet {
 
         try {
             final ChaiUser theUser = pwmApplication.getProxiedChaiUser(userIdentity);
-                                    theUser.unlockPassword();
+            theUser.unlockPassword();
 
             // mark the event log
             final UserInfo userInfoBean = ForgottenPasswordUtil.readUserInfo(pwmRequest, forgottenPasswordBean);
@@ -1147,6 +1144,14 @@ public class ForgottenPasswordServlet extends ControlledPwmServlet {
         }
 
         try {
+            /*
+            final SessionAuthenticator sessionAuthenticator = new SessionAuthenticator(
+                    pwmApplication,
+                    pwmSession,
+                    PwmAuthenticationSource.FORGOTTEN_PASSWORD
+            );
+            sessionAuthenticator.authUserWithUnknownPassword(userIdentity,AuthenticationType.AUTH_FROM_PUBLIC_MODULE);
+            */
             pwmSession.getLoginInfoBean().setAuthenticated(true);
             pwmSession.getLoginInfoBean().getAuthFlags().add(AuthenticationType.AUTH_FROM_PUBLIC_MODULE);
             pwmSession.getLoginInfoBean().setUserIdentity(userIdentity);
