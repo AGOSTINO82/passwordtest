@@ -97,13 +97,13 @@ import password.pwm.util.operations.PasswordUtility;
 import password.pwm.util.operations.cr.NMASCrOperator;
 import password.pwm.util.operations.otp.OTPUserRecord;
 import password.pwm.ws.server.RestResultBean;
-import java.time.Instant;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -226,11 +226,11 @@ public class ForgottenPasswordServlet extends ControlledPwmServlet {
         return ProcessStatus.Continue;
     }
 
-    private static ForgottenPasswordBean forgottenPasswordBean(final PwmRequest pwmRequest) throws PwmUnrecoverableException {
+    static ForgottenPasswordBean forgottenPasswordBean( final PwmRequest pwmRequest ) throws PwmUnrecoverableException {
         return pwmRequest.getPwmApplication().getSessionStateService().getBean(pwmRequest, ForgottenPasswordBean.class);
     }
 
-    private static void clearForgottenPasswordBean(final PwmRequest pwmRequest) throws PwmUnrecoverableException {
+    static void clearForgottenPasswordBean( final PwmRequest pwmRequest ) throws PwmUnrecoverableException {
         pwmRequest.getPwmApplication().getSessionStateService().clearBean(pwmRequest, ForgottenPasswordBean.class);
     }
 
@@ -1177,7 +1177,6 @@ public class ForgottenPasswordServlet extends ControlledPwmServlet {
             final String toAddress = PasswordUtility.sendNewPassword(
                     pwmSession.getUserInfo(),
                     pwmApplication,
-                    pwmSession.getSessionManager().getMacroMachine(pwmApplication),
                     newPassword,
                     pwmSession.getSessionStateBean().getLocale(),
                     messageSendMethod
